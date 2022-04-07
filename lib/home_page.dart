@@ -1,9 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_apps_wildan/cubit/trending_cubit.dart';
+import 'package:movie_apps_wildan/model/trending_response_model.dart';
 import 'package:movie_apps_wildan/utils/style.dart';
 
 
 Style style = new Style();
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  TrendingCubit? _trendingCubit;
+
+  @override
+  void initState() {
+    _trendingCubit = TrendingCubit();
+    _trendingCubit!.getTrending();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,7 +55,30 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 60,
                 ),
-                //list nantinya
+                BlocBuilder(
+                    bloc: _trendingCubit,
+                    builder: (context, state) {
+                  if(state is InitTrendingState){
+                    return Container(height : 100,width: 100,child: CircularProgressIndicator());
+                  }else if(state is FailedTrendingState){
+                    return Text("Failed");
+                  }else{
+                    return Container(
+                      height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: _trendingCubit!.trendingResponseModel == null ? 0 :_trendingCubit!.trendingResponseModel!.results!.length,
+                          itemBuilder: (context, index) {
+                            Results results = _trendingCubit!.trendingResponseModel!.results![index];
+                        return Container(
+                          child: Text(results.originalTitle??"Judul tidak diketahui",style: TextStyle(color: Colors.white),),
+                        );
+
+                      }),
+                    );
+                  }
+                }),
                 SizedBox(
                   height: 40,
                 ),
@@ -78,10 +118,8 @@ class HomePage extends StatelessWidget {
           ),
         )
         );
-    
-  }
 
-  
+  }
 }
 class CategorySeparator extends StatelessWidget {
   final String title;
