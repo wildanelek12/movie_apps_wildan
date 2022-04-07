@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 CategorySeparator(
                   title: 'New Releases',
@@ -36,9 +36,9 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 60,
                 ),
-      
+                //list nantinya
                 SizedBox(
                   height: 40,
                 ),
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-               
+                 //list nantinya
                 SizedBox(
                   height: 40,
                 ),
@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-         
+           //list nantinya
               ],
             ),
           ),
