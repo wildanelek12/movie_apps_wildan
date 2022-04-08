@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_apps_wildan/helper/cubit_observer.dart';
 import 'package:movie_apps_wildan/home_page.dart';

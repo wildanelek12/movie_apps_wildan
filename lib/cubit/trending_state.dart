@@ -10,5 +10,7 @@ class DownTrendingState extends TrendingState {}
 class FailedTrendingState extends TrendingState {
   final String? message;
   FailedTrendingState({this.message});
+
+
 }
 
