@@ -83,7 +83,6 @@ class Results {
     overview = json['overview'];
     voteCount = json['vote_count'];
     voteAverage = json['vote_average'];
-
     popularity = json['popularity'];
     mediaType = json['media_type'];
     video = json['video'];
