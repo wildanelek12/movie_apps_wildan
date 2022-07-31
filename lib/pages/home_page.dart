@@ -8,6 +8,7 @@ import 'package:movie_apps_wildan/cubit/trending_cubit.dart';
 import 'package:movie_apps_wildan/model/comedy_response_model.dart';
 import 'package:movie_apps_wildan/model/trending_response_model.dart';
 import 'package:movie_apps_wildan/pages/detail_page.dart';
+import 'package:movie_apps_wildan/pages/developer_page.dart';
 import 'package:movie_apps_wildan/utils/style.dart';
 
 Style style = new Style();
@@ -46,9 +47,17 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       fontWeight: FontWeight.w900,
                       decoration: TextDecoration.underline))),
-          leading: Icon(
-            Icons.list,
-            color: style.primary,
+          leading: InkWell(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DeveloperPage()),
+              );
+            },
+            child: Icon(
+              Icons.person,
+              color: style.primary,
+            ),
           ),
         ),
         body: SingleChildScrollView(
@@ -98,51 +107,62 @@ class _HomePageState extends State<HomePage> {
                                   Results results = _trendingCubit!
                                       .trendingResponseModel!.results![index];
                                   {
-                                    return Padding(
-                                        padding: EdgeInsets.only(right: 10.0),
-                                        child: Stack(children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Image.network(
-                                              TMDB_BASE_IMAGE_URL +
-                                                  'original/' +
-                                                  results.backdropPath
-                                                      .toString(),
-                                              width: 170,
-                                              height: 180,
-                                              fit: BoxFit.cover,
+                                    return InkWell(
+                                      onTap: (() {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailMoviePage(
+                                                      id_detail_movie: results.id!,
+                                                    )));
+                                      }),
+                                      child: Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Stack(children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                              child: Image.network(
+                                                TMDB_BASE_IMAGE_URL +
+                                                    'original/' +
+                                                    results.backdropPath
+                                                        .toString(),
+                                                width: 170,
+                                                height: 180,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                          Positioned(
-                                              top: 10,
-                                              right: 10,
-                                              child: Container(
-                                                width: 25,
-                                                height: 25,
-                                                decoration: BoxDecoration(
-                                                    color: style.bg,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Icon(Icons.favorite,
-                                                    color: (index % 2) == 0
-                                                        ? style.accent
-                                                        : style.primary,
-                                                    size: 15),
-                                              )),
-                                          Positioned(
-                                              bottom: 10,
-                                              left: 10,
-                                              child: Text(
-                                                  results.originalTitle
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      color: style.primary,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w900)))
-                                        ]));
+                                            Positioned(
+                                                top: 10,
+                                                right: 10,
+                                                child: Container(
+                                                  width: 25,
+                                                  height: 25,
+                                                  decoration: BoxDecoration(
+                                                      color: style.bg,
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                                  child: Icon(Icons.favorite,
+                                                      color: (index % 2) == 0
+                                                          ? style.accent
+                                                          : style.primary,
+                                                      size: 15),
+                                                )),
+                                            Positioned(
+                                                bottom: 10,
+                                                left: 10,
+                                                child: Text(
+                                                    results.originalTitle
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: style.primary,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                        FontWeight.w900)))
+                                          ])),
+                                    );
                                   }
                                 }));
                       }
@@ -194,7 +214,9 @@ class _HomePageState extends State<HomePage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    DetailPage()));
+                                                    DetailMoviePage(
+                                                      id_detail_movie: results.id!,
+                                                    )));
                                       }),
                                       child: Padding(
                                           padding: EdgeInsets.only(right: 10.0),
@@ -287,51 +309,62 @@ class _HomePageState extends State<HomePage> {
                                   ResultsComedy results = _animateCubit!
                                       .comedyResponseModel!.results![index];
                                   {
-                                    return Padding(
-                                        padding: EdgeInsets.only(right: 10.0),
-                                        child: Stack(children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Image.network(
-                                              TMDB_BASE_IMAGE_URL +
-                                                  'original/' +
-                                                  results.backdropPath
-                                                      .toString(),
-                                              width: 170,
-                                              height: 180,
-                                              fit: BoxFit.cover,
+                                    return InkWell(
+                                      onTap: (() {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailMoviePage(
+                                                      id_detail_movie: results.id!,
+                                                    )));
+                                      }),
+                                      child: Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Stack(children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                              child: Image.network(
+                                                TMDB_BASE_IMAGE_URL +
+                                                    'original/' +
+                                                    results.backdropPath
+                                                        .toString(),
+                                                width: 170,
+                                                height: 180,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
-                                          Positioned(
-                                              top: 10,
-                                              right: 10,
-                                              child: Container(
-                                                width: 25,
-                                                height: 25,
-                                                decoration: BoxDecoration(
-                                                    color: style.bg,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Icon(Icons.favorite,
-                                                    color: (index % 2) == 0
-                                                        ? style.accent
-                                                        : style.primary,
-                                                    size: 15),
-                                              )),
-                                          Positioned(
-                                              bottom: 10,
-                                              left: 10,
-                                              child: Text(
-                                                  results.originalTitle
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      color: style.primary,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w900)))
-                                        ]));
+                                            Positioned(
+                                                top: 10,
+                                                right: 10,
+                                                child: Container(
+                                                  width: 25,
+                                                  height: 25,
+                                                  decoration: BoxDecoration(
+                                                      color: style.bg,
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                                  child: Icon(Icons.favorite,
+                                                      color: (index % 2) == 0
+                                                          ? style.accent
+                                                          : style.primary,
+                                                      size: 15),
+                                                )),
+                                            Positioned(
+                                                bottom: 10,
+                                                left: 10,
+                                                child: Text(
+                                                    results.originalTitle
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: style.primary,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                        FontWeight.w900)))
+                                          ])),
+                                    );
                                   }
                                 }));
                       }
@@ -357,13 +390,6 @@ class CategorySeparator extends StatelessWidget {
           title,
           style: TextStyle(
               color: style.primary, fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        Text(
-          'View all',
-          style: TextStyle(
-              color: style.secondary,
-              fontSize: 14,
-              fontWeight: FontWeight.w500),
         ),
       ],
     );
